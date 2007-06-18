@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
-%define pre	20050117
-%define release	%mkrel 1.%{pre}.7
+%define pre	20050612
+%define release	%mkrel 1.%{pre}.1
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -11,7 +11,7 @@ Summary:	%{Summary}
 URL:		http://xconq.org
 License:	GPL
 Group:		Games/Strategy
-Source0:	http://prdownloads.sourceforge.net/xconq/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/xconq/%{name}-%{version}-0pre.0.%{pre}.tar.bz2
 Patch0:		%{name}-7.5.0.makefile.patch.bz2
 Patch1:		%{name}-7.5.0.tclpath.patch.bz2
 BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
@@ -72,7 +72,7 @@ done on it. However, it is a more modern game interface following the
 single-window paradigm, and it is speedy.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-0pre.0.%{pre}
 %patch0 -p1
 %patch1
 
