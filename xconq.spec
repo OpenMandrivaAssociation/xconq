@@ -14,6 +14,7 @@ Group:		Games/Strategy
 Source0:	http://prdownloads.sourceforge.net/xconq/%{name}-%{version}-0pre.0.%{pre}.tar.bz2
 Patch0:		%{name}-7.5.0.makefile.patch.bz2
 Patch1:		%{name}-7.5.0.tclpath.patch.bz2
+Patch2:		xconq-7.5.0-64bit-fix.patch
 BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
 BuildRequires:	ncurses-devel tk tk-devel tcl tcl-devel texinfo
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -73,8 +74,9 @@ single-window paradigm, and it is speedy.
 
 %prep
 %setup -q -n %{name}-%{version}-0pre.0.%{pre}
-%patch0 -p1
-%patch1
+%patch0 -p1 -b .makefile
+%patch1 -p0 -b .tclpath
+%patch2 -p1 -b .64bit
 
 %build
 %configure	--disable-freetypetest \
@@ -107,30 +109,6 @@ install -d %{buildroot}{%{_miconsdir},%{_iconsdir},%{_liconsdir}}
 convert images/default.gif -resize 16x16! %{buildroot}%{_miconsdir}/%{name}.png
 convert images/default.gif -resize 32x32! %{buildroot}%{_iconsdir}/%{name}.png
 convert images/default.gif -resize 48x48! %{buildroot}%{_liconsdir}/%{name}.png
-
-# menu
-install -d %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name}-tcltk <<EOF
-?package(%{name}-tcltk): \
-	command="%{_gamesbindir}/tkconq" \
-	needs="X11" \
-	section="More Applications/Games/Strategy" \
-	icon="%{name}.png" \
-	title="Xconq Tk interface" \
-	longtitle="%{Summary}, Tk interface" \
-	xdg="true"
-EOF
-
-cat > %{buildroot}%{_menudir}/%{name}-sdl <<EOF
-?package(%{name}-sdl): \
-	command="%{_gamesbindir}/sdlconq" \
-	needs="X11" \
-	section="More Applications/Games/Strategy" \
-	icon="%{name}.png" \
-	title="Xconq SDL interface" \
-	longtitle="%{Summary}, SDL interface" \
-	xdg="true"
-EOF
 
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-tcltk.desktop << EOF
@@ -206,7 +184,6 @@ rm -rf %{buildroot}
 %{_gamesbindir}/imf2x
 %{_gamesbindir}/x2imf
 %{_mandir}/man6/tkconq.6*
-%{_menudir}/%{name}-tcltk
 %{_datadir}/applications/mandriva-%{name}-tcltk.desktop
 
 %files curses
@@ -217,5 +194,4 @@ rm -rf %{buildroot}
 %files sdl
 %defattr(-,root,root)
 %attr(2755,root,games) %{_gamesbindir}/sdlconq
-%{_menudir}/%{name}-sdl
 %{_datadir}/applications/mandriva-%{name}-sdl.desktop
