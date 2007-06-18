@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.2
+%define release	%mkrel 1.%{pre}.1
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -17,6 +17,7 @@ Patch1:		%{name}-7.5.0.tclpath.patch.bz2
 Patch2:		xconq-7.5.0-64bit-fix.patch
 BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
 BuildRequires:	ncurses-devel tk tk-devel tcl tcl-devel texinfo ImageMagick
+BuildRequires:	libxmu-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
