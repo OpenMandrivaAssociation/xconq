@@ -17,7 +17,7 @@ Patch1:		%{name}-7.5.0.tclpath.patch.bz2
 Patch2:		xconq-7.5.0-64bit-fix.patch
 BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
 BuildRequires:	ncurses-devel tk tk-devel tcl tcl-devel texinfo ImageMagick
-BuildRequires:	libxmu-devel
+BuildRequires:	X11-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
