@@ -114,7 +114,6 @@ convert images/default.gif -resize 48x48! %{buildroot}%{_liconsdir}/%{name}.png
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-tcltk.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=Xconq Tk interface
 Comment=%{Summary}, Tk interface
 Exec=%{_gamesbindir}/%{name}
@@ -127,7 +126,6 @@ EOF
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-sdl.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=Xconq SDL interface
 Comment=%{Summary}, SDL interface
 Exec=%{_gamesbindir}/%{name}
