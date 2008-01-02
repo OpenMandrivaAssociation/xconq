@@ -18,6 +18,7 @@ Patch2:		xconq-7.5.0-64bit-fix.patch
 BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
 BuildRequires:	ncurses-devel tk tk-devel tcl tcl-devel texinfo ImageMagick
 BuildRequires:	X11-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Xconq is a general strategy game system.  It is a complete system that
