@@ -84,7 +84,7 @@ single-window paradigm, and it is speedy.
 		--disable-paraguitest \
 		--bindir=%{_gamesbindir} \
 		--datadir=%{_gamesdatadir}/%{name} \
-		--enable-alternate-scoresdir=%{_localstatedir}/games/%{name}
+		--enable-alternate-scoresdir=%{_localstatedir}/lib/games/%{name}
 make	all \
 	all-cconq \
 	all-sdlconq \
@@ -93,14 +93,14 @@ make	all \
 %install
 rm -rf %{buildroot}
 install -d -m 755 %{buildroot}%{_gamesdatadir}/games
-install -d -m 755 %{buildroot}%{_localstatedir}/games
+install -d -m 755 %{buildroot}%{_localstatedir}/lib/games
 %makeinstall \
 	install-cconq \
 	install-sdlconq \
 	install-info \
 	bindir=$RPM_BUILD_ROOT%{_gamesbindir} \
 	datadir=$RPM_BUILD_ROOT%{_gamesdatadir}/%{name} \
-	scoresdir=$RPM_BUILD_ROOT%{_localstatedir}/games/%{name}
+	scoresdir=$RPM_BUILD_ROOT%{_localstatedir}/lib/games/%{name}
 
 mv %{buildroot}%{_gamesbindir}/{x,tk}conq
 mv %{buildroot}%{_mandir}/man6/{x,tk}conq.6
@@ -174,7 +174,7 @@ rm -rf %{buildroot}
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_infodir}/*
-%dir %attr(-,games,games) %{_localstatedir}/games/%{name}
+%dir %attr(-,games,games) %{_localstatedir}/lib/games/%{name}
 
 %files tcltk
 %defattr(-,root,root)
