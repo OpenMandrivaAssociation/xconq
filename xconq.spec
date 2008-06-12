@@ -135,17 +135,25 @@ Type=Application
 Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
 EOF
 
+%if %mdkversion < 200900
 %post tcltk
 %{update_menus}
+%endif
 
+%if %mdkversion < 200900
 %post sdl
 %{update_menus}
+%endif
 
+%if %mdkversion < 200900
 %postun tcltk
 %{clean_menus}
+%endif
 
+%if %mdkversion < 200900
 %postun sdl
 %{clean_menus}
+%endif
 
 %clean
 rm -rf %{buildroot}
