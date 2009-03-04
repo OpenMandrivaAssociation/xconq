@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.2
+%define release	%mkrel 1.%{pre}.3
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -12,13 +12,22 @@ URL:		http://xconq.org
 License:	GPL
 Group:		Games/Strategy
 Source0:	http://prdownloads.sourceforge.net/xconq/%{name}-%{version}-0pre.0.%{pre}.tar.bz2
-Patch0:		%{name}-7.5.0.makefile.patch.bz2
-Patch1:		%{name}-7.5.0.tclpath.patch.bz2
+Patch0:		xconq-7.5.0-0pre.0.20050612-makefile.patch
+Patch1:		%{name}-7.5.0.tclpath.patch
 Patch2:		xconq-7.5.0-64bit-fix.patch
-BuildRequires:	paragui-devel >= 1.0.4 freetype2-devel SDL-devel >= 1.2.0
-BuildRequires:	ncurses-devel tk tk-devel tcl tcl-devel texinfo imagemagick
+Patch3:		xconq-7.5.0-0pre.0.20050612-fix-format-errors.patch
+BuildRequires:	paragui-devel >= 1.0.4
+BuildRequires:	freetype2-devel
+BuildRequires:	SDL-devel >= 1.2.0
+BuildRequires:	ncurses-devel
+BuildRequires:	tk
+BuildRequires:	tk-devel
+BuildRequires:	tcl
+BuildRequires:	tcl-devel
+BuildRequires:	texinfo
+BuildRequires:	imagemagick
 BuildRequires:	X11-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Xconq is a general strategy game system.  It is a complete system that
@@ -78,9 +87,10 @@ single-window paradigm, and it is speedy.
 %patch0 -p1 -b .makefile
 %patch1 -p0 -b .tclpath
 %patch2 -p1 -b .64bit
+%patch3 -p1 -b .format
 
 %build
-%configure	--disable-freetypetest \
+%configure2_5x	--disable-freetypetest \
 		--disable-paraguitest \
 		--bindir=%{_gamesbindir} \
 		--datadir=%{_gamesdatadir}/%{name} \
