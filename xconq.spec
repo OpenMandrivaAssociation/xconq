@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.3
+%define release	%mkrel 1.%{pre}.4
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -145,6 +145,15 @@ Type=Application
 Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
 EOF
 
+for i in cconq sdlconq; do
+mv $RPM_BUILD_ROOT%{_gamesbindir}/${i} $RPM_BUILD_ROOT%{_gamesbindir}/${i}.bin
+cat <<EOF >  $RPM_BUILD_ROOT%{_gamesbindir}/${i}
+#!/bin/bash
+cd  %{_gamesdatadir}/%{name}/lib
+exec %{_gamesbindir}/${i}.bin 
+EOF
+done;
+
 %if %mdkversion < 200900
 %post tcltk
 %{update_menus}
@@ -205,10 +214,10 @@ rm -rf %{buildroot}
 
 %files curses
 %defattr(-,root,root)
-%attr(2755,root,games) %{_gamesbindir}/cconq
+%attr(2755,root,games) %{_gamesbindir}/cconq*
 %{_mandir}/man6/cconq.6*
 
 %files sdl
 %defattr(-,root,root)
-%attr(2755,root,games) %{_gamesbindir}/sdlconq
+%attr(2755,root,games) %{_gamesbindir}/sdlconq*
 %{_datadir}/applications/mandriva-%{name}-sdl.desktop
