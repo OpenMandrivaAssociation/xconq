@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.4
+%define release	%mkrel 1.%{pre}.5
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -126,7 +126,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-tcltk.desktop << EOF
 [Desktop Entry]
 Name=Xconq Tk interface
 Comment=%{Summary}, Tk interface
-Exec=%{_gamesbindir}/%{name}
+Exec=%{_gamesbindir}/tkconq
 Icon=%{name}
 Terminal=false
 Type=Application
@@ -138,14 +138,14 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}-sdl.desktop << EOF
 [Desktop Entry]
 Name=Xconq SDL interface
 Comment=%{Summary}, SDL interface
-Exec=%{_gamesbindir}/%{name}
+Exec=%{_gamesbindir}/sdlconq
 Icon=%{name}
 Terminal=false
 Type=Application
 Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
 EOF
 
-for i in cconq sdlconq; do
+for i in cconq sdlconq tkconq; do
 mv $RPM_BUILD_ROOT%{_gamesbindir}/${i} $RPM_BUILD_ROOT%{_gamesbindir}/${i}.bin
 cat <<EOF >  $RPM_BUILD_ROOT%{_gamesbindir}/${i}
 #!/bin/bash
