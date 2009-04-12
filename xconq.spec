@@ -205,7 +205,7 @@ rm -rf %{buildroot}
 
 %files tcltk
 %defattr(-,root,root)
-%attr(2755,root,games) %{_gamesbindir}/tkconq
+%attr(2755,root,games) %{_gamesbindir}/tkconq*
 %{_gamesbindir}/imfapp
 %{_gamesbindir}/imf2x
 %{_gamesbindir}/x2imf
