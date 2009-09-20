@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.5
+%define release	%mkrel 1.%{pre}.6
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
