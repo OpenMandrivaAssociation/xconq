@@ -1,7 +1,7 @@
 %define name	xconq
 %define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.6
+%define release	%mkrel 1.%{pre}.7
 %define Summary	General turn-based 2D strategy game system
 
 Name:		%{name}
@@ -26,7 +26,7 @@ BuildRequires:	tcl
 BuildRequires:	tcl-devel
 BuildRequires:	texinfo
 BuildRequires:	imagemagick
-BuildRequires:	X11-devel
+BuildRequires:	libxaw-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
