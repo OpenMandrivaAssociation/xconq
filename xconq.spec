@@ -95,6 +95,8 @@ single-window paradigm, and it is speedy.
 		--bindir=%{_gamesbindir} \
 		--datadir=%{_gamesdatadir}/%{name} \
 		--enable-alternate-scoresdir=%{_localstatedir}/lib/games/%{name}
+
+LDFLAGS="%ldflags" \
 make	all \
 	all-cconq \
 	all-sdlconq \
