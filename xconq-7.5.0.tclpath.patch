@@ -1,0 +1,80 @@
+--- tcltk/tkmain.c~	2004-11-13 22:48:38.000000000 +0100
++++ tcltk/tkmain.c	2005-12-29 12:26:57.000000000 +0100
+@@ -436,73 +436,10 @@
+ 
+     /* Find Tkconq's Tcl script. */
+     {
+-	int loaded = FALSE, i = 0;
+-	FILE *fp;
+-	LibraryPath *p;
+-#ifndef MAC
+-	char *relpaths [] = {
+-	    "../share/xconq/tcltk/tkconq", "tcltk/tkconq", "tkconq", 
+-	    "xconq/tcltk/tkconq", NULL
+-	};
+-	char *librelpaths [] = {
+-	    "../tcltk/tkconq", "../tkconq", NULL
+-	};
+-#else
+-	char *relpaths [] = {
+-	    ":tcltk:tkconq", ":tkconq", "::tcltk:tkconq", NULL
+-	};
+-	char *librelpaths [] = {
+-	    NULL
+-	};
+-#endif
+-
+-	/* First try paths relative to the working directory. */
+-	for (i = 0; relpaths[i]; ++i) {
+-	    make_pathname("", relpaths[i], "tcl", pathbuf);
+-	    if ((fp = fopen(pathbuf, "r")) != NULL) {
+-		fclose(fp);
+-		rslt = Tcl_EvalFile(interp, pathbuf);
+-		if (rslt == TCL_ERROR)
+-		  init_error("Error reading tcl from %s: %s",
+-			     pathbuf, interp->result);
+-		loaded = TRUE;
+-		break;
+-	    }
+-	}
+-	/* Then try paths relative to the library directories. */
+-	if (!loaded) {
+-	    for_all_library_paths(p) {
+-		for (i = 0; librelpaths[i]; ++i) {
+-		    make_pathname(p->path, librelpaths[i], "tcl", pathbuf);
+-		    if ((fp = fopen(pathbuf, "r")) != NULL) {
+-			fclose(fp);
+-			rslt = Tcl_EvalFile(interp, pathbuf);
+-			if (rslt == TCL_ERROR)
+-			  init_error("Error reading tcl from %s: %s",
+-				     pathbuf, interp->result);
+-			loaded = TRUE;
+-			break;
+-		    }
+-		}
+-		if (loaded)
+-		  break;
+-	    }
+-	} /* if (!loaded) */
+-	/* List all the places that were searched if we failed to load the 
+-	   script. */
+-	if (!loaded) {
+-	    for (i = 0; relpaths[i]; ++i) {
+-		make_pathname("", relpaths[i], "tcl", pathbuf);
+-		init_warning("Failed to load tkconq from: %s\n", pathbuf);
+-	    }
+-	    for_all_library_paths(p) {
+-		for (i = 0; librelpaths[i]; ++i) {
+-		    make_pathname(p->path, librelpaths[i], "tcl", pathbuf);
+-		    init_warning("Failed to load tkconq from: %s\n", pathbuf);
+-		}
+-	    }
+-	    init_error("tkconq.tcl file could not be loaded");
+-	}
++	rslt = Tcl_EvalFile(interp, "/usr/share/games/xconq/tcltk/tkconq.tcl");
++	if (rslt == TCL_ERROR)
++	  init_error("Error reading tcl from %s: %s",
++	     pathbuf, interp->result);
+     } /* { */
+ 
+     imf_interp_hook = tk_interp_imf;

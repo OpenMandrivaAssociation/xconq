@@ -1,0 +1,62 @@
+--- xconq-7.5.0-0pre.0.20050612/tcltk/tkmap.c.orig	2007-06-18 16:00:36.000000000 +0200
++++ xconq-7.5.0-0pre.0.20050612/tcltk/tkmap.c	2007-06-18 16:01:02.000000000 +0200
+@@ -3046,7 +3046,7 @@ draw_borders_iso(MapW *mapw, int x, int 
+ 	    wid2 = wid / 2;
+ 	    XSetLineAttributes(dpy, gc, wid, LineSolid, CapButt, JoinMiter); 
+ 	    color = dside->ui->cell_color[b];
+-	    if ((int)color < 0)
++	    if (color < 0)
+ 	      color = dside->ui->blackcolor;
+ 	    XSetForeground(dpy, gc, color->pixel);
+ 	    XSetBackground(dpy, gc, dside->ui->whitecolor->pixel);
+@@ -3134,7 +3134,7 @@ draw_connections(MapW *mapw, int vx, int
+ 	wid2 = wid / 2;
+ 	XSetLineAttributes(dpy, gc, wid, LineSolid, CapButt, JoinMiter); 
+ 	color = dside->ui->cell_color[c];
+-	if ((int)color < 0)
++	if (color < 0)
+ 	  color = dside->ui->blackcolor;
+ 	XSetForeground(dpy, gc, color->pixel);
+ 	XSetBackground(dpy, gc, dside->ui->whitecolor->pixel);
+@@ -3241,7 +3241,7 @@ draw_connections_iso(MapW *mapw, int x, 
+ 	    wid2 = wid / 2;
+ 	    XSetLineAttributes(dpy, gc, wid, LineSolid, CapButt, JoinMiter); 
+ 	    color = dside->ui->cell_color[c];
+-	    if ((int)color < 0)
++	    if (color < 0)
+ 	      color = dside->ui->blackcolor;
+ 	    XSetForeground(dpy, gc, color->pixel);
+ 	    XSetBackground(dpy, gc, dside->ui->whitecolor->pixel);
+--- xconq-7.5.0-0pre.0.20050612/configure~	2005-05-01 03:47:14.000000000 +0200
++++ xconq-7.5.0-0pre.0.20050612/configure	2007-06-18 16:29:01.000000000 +0200
+@@ -5418,7 +5418,7 @@ case "$host" in
+     possible_dirs="${possible_dirs} ../lib ../curses"
+     ;;
+   *)
+-    possible_dirs="/lib /usr/lib /usr/local/lib /opt/lib /opt/local/lib"
++    possible_dirs="/lib /usr/lib /usr/local/lib /opt/lib /opt/local/lib /usr/lib64"
+     possible_dirs="${possible_dirs} /opt/share/lib ../lib ../curses"
+     ;;
+ esac
+--- xconq-7.5.0-0pre.0.20050612/configure.in~	2005-05-01 03:47:14.000000000 +0200
++++ xconq-7.5.0-0pre.0.20050612/configure.in	2007-06-18 16:30:45.000000000 +0200
+@@ -206,7 +206,7 @@ case "$host" in
+     possible_dirs="${possible_dirs} ../lib ../curses"
+     ;;
+   *)
+-    possible_dirs="/lib /usr/lib /usr/local/lib /opt/lib /opt/local/lib"
++    possible_dirs="/lib /usr/lib /usr/local/lib /opt/lib /opt/local/lib /usr/lib64"
+     possible_dirs="${possible_dirs} /opt/share/lib ../lib ../curses"
+     ;;
+ esac
+--- xconq-7.5.0-0pre.0.20050612/curses/cdraw.c~	2004-11-21 03:59:20.000000000 +0100
++++ xconq-7.5.0-0pre.0.20050612/curses/cdraw.c	2007-06-18 17:46:32.000000000 +0200
+@@ -939,7 +939,7 @@ clear_window(struct ccwin *win)
+ 	  mvaddstr(win->y + i, win->x, tmpbuf);
+     } else {
+ 	printf("error: win %d is %dx%d @ %d,%d\n",
+-	       (int) win, win->w, win->h, win->x, win->y);
++	       win, win->w, win->h, win->x, win->y);
+     }
+ }
+ 

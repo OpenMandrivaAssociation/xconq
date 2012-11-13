@@ -1,0 +1,225 @@
+--- xconq-7.5.0-0pre.0.20050612/curses/Makefile.in.makefile	2004-11-21 02:59:19.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/curses/Makefile.in	2010-12-08 08:33:33.000000000 +0000
+@@ -133,9 +133,6 @@
+ 		progname="$(CCONQ_EXEC_NAME)" ; \
+ 	fi; \
+ 	$(INSTALL_PROGRAM) $${progname} $(bindir); \
+-	chown $(GAMEUID) $(bindir)/$${progname}; \
+-	chgrp $(GAMEGRP) $(bindir)/$${progname}; \
+-	chmod $(GAMEPERM) $(bindir)/$${progname}; \
+ 	$(INSTALL_DATA) cconq.6 $(man6dir)
+ 
+ # Cleanliness support.
+@@ -153,8 +150,8 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-          && CONFIG_FILES=curses/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=curses/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+ 
+ # Dependencies.
+ 
+--- xconq-7.5.0-0pre.0.20050612/doc/Makefile.in.makefile	2010-12-08 08:43:47.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/doc/Makefile.in	2010-12-08 08:44:06.000000000 +0000
+@@ -224,5 +224,5 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-          && CONFIG_FILES=doc/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=doc/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+--- xconq-7.5.0-0pre.0.20050612/images/Makefile.in.makefile	2004-11-21 02:59:21.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/images/Makefile.in	2010-12-08 08:43:32.000000000 +0000
+@@ -57,10 +57,6 @@
+ 		echo $$i; \
+ 		$(INSTALL_DATA) $(srcdir)/$$i $(imagesdir); \
+ 	done
+-	chown $(GAMEUID) $(imagesdir) $(imagesdir)/*
+-	chgrp $(GAMEGRP) $(imagesdir) $(imagesdir)/*
+-	chmod $(DIRPERM) $(imagesdir)
+-	chmod $(FILEPERM) $(imagesdir)/*
+ 
+ clean:
+ 
+@@ -73,5 +69,5 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-          && CONFIG_FILES=lib/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=lib/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+--- xconq-7.5.0-0pre.0.20050612/kernel/Makefile.in.makefile	2005-06-06 03:03:44.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/kernel/Makefile.in	2010-12-08 08:33:33.000000000 +0000
+@@ -207,8 +207,8 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-	  && CONFIG_FILES=kernel/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=kernel/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+ 
+ # All the .h dependencies.
+ 
+--- xconq-7.5.0-0pre.0.20050612/sdl/Makefile.in.makefile	2005-05-01 01:47:14.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/sdl/Makefile.in	2010-12-08 08:42:03.000000000 +0000
+@@ -245,9 +245,6 @@
+ 		progname="$(SDLCONQ_EXEC_NAME)" ; \
+ 	fi; \
+ 	$(INSTALL_PROGRAM) $${progname} $(bindir); \
+-	chown $(GAMEUID) $(bindir)/$${progname}; \
+-	chgrp $(GAMEGRP) $(bindir)/$${progname}; \
+-	chmod $(GAMEPERM) $(bindir)/$${progname};
+ 
+ install-manpages-only:
+ 	(cd $(x11srcdir) && $(MAKE) $(FLAGS_TO_PASS) install-manpages-only)
+@@ -268,8 +265,8 @@
+ 	rm -f *~* .*~*
+ 
+ Makefile: $(srcdir)/Makefile.in
+-        cd .. \
+-          && CONFIG_FILES=sdl/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=sdl/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+ 
+ # All the .h dependencies.
+ 
+--- xconq-7.5.0-0pre.0.20050612/tcltk/Makefile.in.makefile	2005-06-06 03:03:56.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/tcltk/Makefile.in	2010-12-08 08:33:33.000000000 +0000
+@@ -90,7 +90,7 @@
+ LIB_RUNTIME_DIR = $(libdir)
+ TCL_CFLAGS = @TCL_INCLUDE_SPEC@
+ TK_CFLAGS = @TK_INCLUDE_SPEC@ 
+-TCLTK_CFLAGS = $(TCL_CFLAGS) $(TK_CFLAGS)
++TCLTK_CFLAGS = $(TCL_CFLAGS) $(TK_CFLAGS) -DUSE_INTERP_RESULT
+ TCL_DL_LIBS = @TCL_DL_LIBS@
+ TCL_LDFLAGS = @TCL_LD_SEARCH_FLAGS@ @TCL_LDFLAGS@
+ TK_LDFLAGS = @TK_LDFLAGS@
+@@ -291,12 +291,6 @@
+ 	$(INSTALL_DATA) $(srcdir)/BWidget/*.* $(BWidgetdir)
+ 	$(INSTALL_DATA) $(srcdir)/BWidget/images/*.* $(BWidgetimagesdir)
+ 	$(INSTALL_DATA) $(srcdir)/BWidget/lang/*.* $(BWidgetlangdir)
+-	chown $(GAMEUID) $(tcltkdir) $(BWidgetdir) $(BWidgetimagesdir) $(BWidgetlangdir) \
+-				     $(tcltkdir)/*.* $(BWidgetdir)/*.* $(BWidgetimagesdir)/*.* $(BWidgetlangdir)/*.*
+-	chgrp $(GAMEGRP) $(tcltkdir) $(BWidgetdir) $(BWidgetimagesdir) $(BWidgetlangdir) \
+-				     $(tcltkdir)/*.* $(BWidgetdir)/*.* $(BWidgetimagesdir)/*.* $(BWidgetlangdir)/*.*
+-	chmod $(DIRPERM) $(tcltkdir) $(BWidgetdir) $(BWidgetimagesdir) $(BWidgetlangdir)
+-	chmod $(FILEPERM) $(tcltkdir)/*.* $(BWidgetdir)/*.* $(BWidgetimagesdir)/*.* $(BWidgetlangdir)/*.*
+ 
+ install-xconq-only: $(TKCONQ_EXEC_NAME)
+ 	srcroot=`cd $(srcroot); pwd`; export srcroot; \
+@@ -306,9 +300,6 @@
+ 		progname="$(TKCONQ_EXEC_NAME)" ; \
+ 	fi; \
+ 	$(INSTALL_PROGRAM) $${progname} $(bindir); \
+-	chown $(GAMEUID) $(bindir)/$${progname}; \
+-	chgrp $(GAMEGRP) $(bindir)/$${progname}; \
+-	chmod $(GAMEPERM) $(bindir)/$${progname}; 
+ 
+ install-imfapp-only: imfapp
+ 	srcroot=`cd $(srcroot); pwd`; export srcroot; \
+@@ -318,9 +309,6 @@
+ 		progname="imfapp" ; \
+ 	fi; \
+ 	$(INSTALL_PROGRAM) $${progname} $(bindir); \
+-	chown $(GAMEUID) $(bindir)/$${progname}; \
+-	chgrp $(GAMEGRP) $(bindir)/$${progname}; \
+-	chmod $(IAPPPERM) $(bindir)/$${progname};
+ 
+ install-ximfconvs-only: x2imf imf2x
+ 	(cd ../x11 && $(MAKE) $(FLAGS_TO_PASS) install-ximfconvs-only)
+@@ -344,8 +332,8 @@
+ 	rm -f *~* .*~*
+ 
+ Makefile: $(srcdir)/Makefile.in
+-        cd .. \
+-          && CONFIG_FILES=tcltk/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=tcltk/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+ 
+ # All the .h dependencies.
+ 
+--- xconq-7.5.0-0pre.0.20050612/x11/Makefile.in.makefile	2004-11-21 03:02:57.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/x11/Makefile.in	2010-12-08 08:33:33.000000000 +0000
+@@ -214,15 +214,9 @@
+ install-xtconq: install-ximfconvs-only 
+ 	srcroot=`cd $(srcroot); pwd`; export srcroot; \
+ 	$(INSTALL_PROGRAM) $(XTCONQ_EXEC_NAME) $(bindir); \
+-	chown $(GAMEUID) $(bindir)/xtconq; \
+-	chgrp $(GAMEGRP) $(bindir)/xtconq; \
+-	chmod $(GAMEPERM) $(bindir)/xtconq; \
+ 	$(INSTALL_DATA) Xtconq $(appdefaultsdir); \
+ 	$(INSTALL_DATA) Xtconq-color $(appdefaultsdir); \
+ 	$(INSTALL_PROGRAM) xshowimf $(bindir); \
+-	chown $(GAMEUID) $(bindir)/xshowimf ; \
+-	chgrp $(GAMEGRP) $(bindir)/xshowimf ; \
+-	chmod $(IAPPPERM) $(bindir)/xshowimf ; \
+ 	$(INSTALL_DATA) XShowimf $(appdefaultsdir); \
+ 	$(INSTALL_DATA) XShowimf-color $(appdefaultsdir); \
+ 	$(INSTALL_DATA) xtconq.6 $(man6dir)
+@@ -233,9 +227,6 @@
+ 	srcroot=`cd $(srcroot); pwd`; export srcroot; \
+ 	$(INSTALL_PROGRAM) imf2x $(bindir); \
+ 	$(INSTALL_PROGRAM) x2imf $(bindir); \
+-	chown $(GAMEUID) $(bindir)/imf2x $(bindir)/x2imf ; \
+-	chgrp $(GAMEGRP) $(bindir)/imf2x $(bindir)/x2imf ; \
+-	chmod $(IAPPPERM) $(bindir)/imf2x $(bindir)/x2imf
+ 
+ # Installation of manpages.
+ 
+@@ -260,8 +251,8 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-          && CONFIG_FILES=x11/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=x11/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+ 
+ # Dependencies.
+ 
+--- xconq-7.5.0-0pre.0.20050612/lib/Makefile.in.makefile	2004-11-21 03:01:29.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/lib/Makefile.in	2010-12-08 08:49:30.000000000 +0000
+@@ -53,10 +53,6 @@
+ 		echo $$i; \
+ 		$(INSTALL_DATA) $(srcdir)/$$i $(gamelibdir); \
+ 	done
+-	chown $(GAMEUID) $(gamelibdir) $(gamelibdir)/*
+-	chgrp $(GAMEGRP) $(gamelibdir) $(gamelibdir)/*
+-	chmod $(DIRPERM) $(gamelibdir)
+-	chmod $(FILEPERM) $(gamelibdir)/*
+ 
+ clean:
+ 
+@@ -69,5 +65,5 @@
+ realclean: distclean
+ 
+ Makefile: Makefile.in $(host_makefile_frag) $(target_makefile_frag)
+-        cd .. \
+-          && CONFIG_FILES=lib/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++	cd .. \
++	&& CONFIG_FILES=lib/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+--- xconq-7.5.0-0pre.0.20050612/Makefile.in.makefile	2005-05-01 01:47:14.000000000 +0000
++++ xconq-7.5.0-0pre.0.20050612/Makefile.in	2010-12-08 09:32:57.000000000 +0000
+@@ -94,6 +94,7 @@
+ 	"REQD_CFLAGS=$(REQD_CFLAGS)" \
+ 	"CXX=$(CXX)" \
+ 	"CXXFLAGS=$(CXXFLAGS)" \
++	"LDFLAGS=$(LDFLAGS)" \
+ 	"RANLIB=$(RANLIB)" \
+ 	"MAKEINFO=$(MAKEINFO)" \
+ 	"INSTALL=$(INSTALL)" \
+@@ -305,9 +306,6 @@
+ 			true ; \
+ 		fi ; \
+ 	done
+-	chown $(GAMEUID) $(scoresdir)
+-	chgrp $(GAMEGRP) $(scoresdir)
+-	chmod $(DIRPERM) $(scoresdir)
+ 
+ # Build a source distribution.
+ DIST_VERSION=@XCONQ_VERSION_FULL@

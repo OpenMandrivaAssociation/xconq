@@ -1,0 +1,54 @@
+diff -Naur xconq-7.5.0-0pre.0.20050612/kernel/cmdline.c xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/cmdline.c
+--- xconq-7.5.0-0pre.0.20050612/kernel/cmdline.c	2005-03-12 04:12:20.000000000 +0100
++++ xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/cmdline.c	2009-03-04 21:55:19.000000000 +0100
+@@ -329,7 +329,7 @@
+ 	    printf("    %s\n");
+ 	    if (mainmodule->blurb != lispnil) {
+ 	    	append_blurb_strings(blurb, mainmodule->blurb);
+-	    	printf(blurb);
++	    	printf("%s", blurb);
+ 	    } else {
+ 	    	printf("(no description)");
+ 	    }
+diff -Naur xconq-7.5.0-0pre.0.20050612/kernel/history.c xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/history.c
+--- xconq-7.5.0-0pre.0.20050612/kernel/history.c	2005-03-28 05:56:51.000000000 +0200
++++ xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/history.c	2009-03-04 21:58:37.000000000 +0100
+@@ -190,7 +190,7 @@
+ 		&& find_event_type(pattern) == hevt->type) {
+ 		text = cadr(head);
+ 		if (stringp(text)) {
+-		    sprintf(abuf, c_string(text));
++		    sprintf(abuf, "%s", c_string(text));
+ 		} else {
+ 		    sprintlisp(abuf, text, 50);
+ 		}
+diff -Naur xconq-7.5.0-0pre.0.20050612/kernel/nlang.c xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/nlang.c
+--- xconq-7.5.0-0pre.0.20050612/kernel/nlang.c	2005-06-06 05:03:45.000000000 +0200
++++ xconq-7.5.0-0pre.0.20050612-fix-format-errors/kernel/nlang.c	2009-03-04 22:03:24.000000000 +0100
+@@ -839,7 +839,7 @@
+ 	    && strcmp(end, "s'") != 0
+ 	    && strcmp(end, "z'") != 0)
+ 	  sprintf(past_unitbuf, "the ");
+-	sprintf(past_unitbuf, side_adjective(side2));
++	sprintf(past_unitbuf, "%s", side_adjective(side2));
+ 	strcat(past_unitbuf, " ");
+     }
+     /* Now add the past_unit's unique description. */
+@@ -1035,7 +1035,7 @@
+ 		&& find_event_type(pattern) == hevt->type) {
+ 		text = cadr(head);
+ 		if (stringp(text)) {
+-		    sprintf(buf, c_string(text));
++		    sprintf(buf, "%s", c_string(text));
+ 		} else {
+ 		    sprintlisp(buf, text, 50);
+ 		}
+@@ -1046,7 +1046,7 @@
+ 		       ) {
+ 		text = cadr(head);
+ 		if (stringp(text)) {
+-		    sprintf(buf, c_string(text));
++		    sprintf(buf, "%s", c_string(text));
+ 		} else {
+ 		    event_desc_from_list(side, text, hevt, buf);
+ 		}
