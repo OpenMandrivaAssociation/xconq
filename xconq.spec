@@ -223,3 +223,105 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %attr(2755,root,games) %{_gamesbindir}/sdlconq*
 %{_datadir}/applications/mandriva-%{name}-sdl.desktop
+
+
+%changelog
+* Wed Dec 08 2010 Funda Wang <fwang@mandriva.org> 7.5.0-1.20050612.8mdv2011.0
++ Revision: 616052
+- fix more makefile
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - the mass rebuild of 2010.1 packages
+
+* Tue Apr 13 2010 Thierry Vignaud <tv@mandriva.org> 7.5.0-1.20050612.7mdv2010.1
++ Revision: 534511
+- rebuild
+
+* Sun Apr 12 2009 Michael Scherer <misc@mandriva.org> 7.5.0-1.20050612.5mdv2009.1
++ Revision: 366478
+- oups, forgot to include the binary
+- fix 38354 by correcting menu
+
+* Sat Apr 11 2009 Michael Scherer <misc@mandriva.org> 7.5.0-1.20050612.4mdv2009.1
++ Revision: 366293
+- remove old bzip patch ( already uncompressed )
+- fix bug 49542 and 49544
+
+* Wed Mar 04 2009 Guillaume Rousse <guillomovitch@mandriva.org> 7.5.0-1.20050612.3mdv2009.1
++ Revision: 348661
+- fix format errors
+- fix build with latest tk
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Thu Jun 12 2008 Pixel <pixel@mandriva.com> 7.5.0-1.20050612.2mdv2009.0
++ Revision: 218426
+- rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+- adapt to %%_localstatedir now being /var instead of /var/lib (#22312)
+
+* Thu Jan 03 2008 Olivier Blin <oblin@mandriva.com> 7.5.0-1.20050612.2mdv2008.1
++ Revision: 140953
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Fri Sep 07 2007 Anssi Hannula <anssi@mandriva.org> 7.5.0-1.20050612.2mdv2008.0
++ Revision: 82059
+- rebuild for new soname of tcl
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+
+* Mon Jun 18 2007 Per Øyvind Karlsen <peroyvind@mandriva.org> 7.5.0-1.20050612.1mdv2008.0
++ Revision: 41015
+- ?\194?\164#"?\194?\164#" buildrequires
+- fix buildrequires
+- fix buildrequires
+- fix 64 bit build (P2)
+- drop debian menu
+- a bit more new snapshot..
+- Import xconq
+
+
+
+* Fri Aug 25 2006 Per Øyvind Karlsen <pkarlsen@mandriva.com> 7.5.0-1.20050117.7mdv2007.0
+- fix macros for menu
+- xdg menu
+- cleanups
+
+* Wed Jan 04 2006 Oden Eriksson <oeriksson@mandriva.com> 7.5.0-0.20050117.6mdk
+- rebuilt against soname aware deps (tcl/tk)
+- fix deps
+
+* Thu Dec 29 2005 Guillaume Rousse <guillomovitch@mandriva.org> 7.5.0-0.20050117.5mdk
+- fix buildrequires
+- patch tk version to find tkconq.tcl correctly (fix #20363)
+
+* Wed Dec 28 2005 Guillaume Rousse <guillomovitch@mandriva.org> 7.5.0-0.20050117.4mdk
+- buildrequires
+
+* Tue Dec 20 2005 Guillaume Rousse <guillomovitch@mandriva.org> 7.5.0-0.20050117.3mdk
+- %%mkrel
+- fix doc files encoding and perms
+- relax requires versioning
+
+* Sat Oct 01 2005 Nicolas Lécureuil <neoclust@mandriva.org> 7.5.0-0.20050117.2mdk
+- BuildRequires fix
+
+* Fri Jan 21 2005 Guillaume Rousse <guillomovitch@mandrake.org> 7.5.0-0.20050117.1mdk 
+- new version
+
+* Sun Jan 16 2005 Guillaume Rousse <guillomovitch@mandrake.org> 7.5.0-0.20050108.1mdk 
+- new version
+
+* Sun Nov 28 2004 Guillaume Rousse <guillomovitch@mandrake.org> 7.5.0-0.20041126.1mdk 
+- new version
+- fix info pages installation
+- menus
+- disable parallel build
+- use %%{_gamesbindir} and %%{_gamesdatadir} instead of %%{_bindir} and %%{_datadir}
+
+* Wed Nov 24 2004 Guillaume Rousse <guillomovitch@mandrake.org> 7.5.0-0.20041119.1mdk 
+- first mdk release, from an heavily modified spec file from Eric McDonald <eric_mcdonald@users.sourceforge.net>
