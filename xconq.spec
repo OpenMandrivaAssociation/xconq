@@ -180,13 +180,6 @@ done;
 rm -rf %{buildroot}
 
 
-%postun
-%_remove_install_info hacking.info
-%_remove_install_info xcdesign.info-1
-%_remove_install_info xcdesign.info-2
-%_remove_install_info xcdesign.info-3
-%_remove_install_info xcdesign.info 
-%_remove_install_info xconq.info
 
 %files
 %defattr(-,root,root)
