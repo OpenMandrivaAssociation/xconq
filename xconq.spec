@@ -179,13 +179,6 @@ done;
 %clean
 rm -rf %{buildroot}
 
-%post
-%_install_info hacking.info
-%_install_info xcdesign.info-1
-%_install_info xcdesign.info-2
-%_install_info xcdesign.info-3
-%_install_info xcdesign.info 
-%_install_info xconq.info
 
 %postun
 %_remove_install_info hacking.info
