@@ -1,13 +1,9 @@
-%define name	xconq
-%define version	7.5.0
 %define pre	20050612
-%define release	%mkrel 1.%{pre}.8
-%define Summary	General turn-based 2D strategy game system
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Summary:	%{Summary}
+Name:		xconq
+Version:	7.5.0
+Release:	1.%{pre}.9
+Summary:	Summary General turn-based 2D strategy game system
 URL:		http://xconq.org
 License:	GPL
 Group:		Games/Strategy
@@ -27,7 +23,6 @@ BuildRequires:	tcl-devel
 BuildRequires:	texinfo
 BuildRequires:	imagemagick
 BuildRequires:	libxaw-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Xconq is a general strategy game system.  It is a complete system that
@@ -110,9 +105,9 @@ install -d -m 755 %{buildroot}%{_localstatedir}/lib/games
 	install-cconq \
 	install-sdlconq \
 	install-info \
-	bindir=$RPM_BUILD_ROOT%{_gamesbindir} \
-	datadir=$RPM_BUILD_ROOT%{_gamesdatadir}/%{name} \
-	scoresdir=$RPM_BUILD_ROOT%{_localstatedir}/lib/games/%{name}
+	bindir=%{buildroot}%{_gamesbindir} \
+	datadir=%{buildroot}%{_gamesdatadir}/%{name} \
+	scoresdir=%{buildroot}%{_localstatedir}/lib/games/%{name}
 
 mv %{buildroot}%{_gamesbindir}/{x,tk}conq
 mv %{buildroot}%{_mandir}/man6/{x,tk}conq.6
@@ -148,41 +143,15 @@ Categories=Game;StrategyGame;X-MandrivaLinux-MoreApplications-Games-Strategy;
 EOF
 
 for i in cconq sdlconq tkconq; do
-mv $RPM_BUILD_ROOT%{_gamesbindir}/${i} $RPM_BUILD_ROOT%{_gamesbindir}/${i}.bin
-cat <<EOF >  $RPM_BUILD_ROOT%{_gamesbindir}/${i}
+mv %{buildroot}%{_gamesbindir}/${i} %{buildroot}%{_gamesbindir}/${i}.bin
+cat <<EOF >  %{buildroot}%{_gamesbindir}/${i}
 #!/bin/bash
 cd  %{_gamesdatadir}/%{name}/lib
 exec %{_gamesbindir}/${i}.bin 
 EOF
 done;
 
-%if %mdkversion < 200900
-%post tcltk
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%post sdl
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun tcltk
-%{clean_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun sdl
-%{clean_menus}
-%endif
-
-%clean
-rm -rf %{buildroot}
-
-
-
 %files
-%defattr(-,root,root)
 %doc README ChangeLog NEWS doc/*.html changelogs
 %{_gamesdatadir}/%{name}
 %{_iconsdir}/%{name}.png
@@ -192,7 +161,6 @@ rm -rf %{buildroot}
 %dir %attr(-,games,games) %{_localstatedir}/lib/games/%{name}
 
 %files tcltk
-%defattr(-,root,root)
 %attr(2755,root,games) %{_gamesbindir}/tkconq*
 %{_gamesbindir}/imfapp
 %{_gamesbindir}/imf2x
@@ -201,12 +169,10 @@ rm -rf %{buildroot}
 %{_datadir}/applications/mandriva-%{name}-tcltk.desktop
 
 %files curses
-%defattr(-,root,root)
 %attr(2755,root,games) %{_gamesbindir}/cconq*
 %{_mandir}/man6/cconq.6*
 
 %files sdl
-%defattr(-,root,root)
 %attr(2755,root,games) %{_gamesbindir}/sdlconq*
 %{_datadir}/applications/mandriva-%{name}-sdl.desktop
 
