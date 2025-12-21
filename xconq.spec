@@ -12,6 +12,11 @@ Patch0:		xconq-7.5.0-0pre.0.20050612-makefile.patch
 Patch1:		%{name}-7.5.0.tclpath.patch
 Patch2:		xconq-7.5.0-64bit-fix.patch
 Patch3:		xconq-7.5.0-0pre.0.20050612-fix-format-errors.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	paragui-devel >= 1.0.4
 BuildRequires:	freetype2-devel
 BuildRequires:	SDL-devel >= 1.2.0
